@@ -1,5 +1,5 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  %a.navbar-brand{:href => "#"} 
+  %a.navbar-brand{:href => "/"} 
     RubyBootcamp
   %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
@@ -8,41 +8,43 @@
       %ul.navbar-nav.mr-auto
         %li{:class => "nav-item #{'active' if request.path == root_path}"}
           = link_to root_path, class: 'nav-link' do
-
             .fas.fa-home
             Home
         %li{:class => "nav-item #{'active' if request.path == courses_path}"}
-          = link_to courses_path, class: 'nav-link' do 
-                        
+          = link_to courses_path, class: 'nav-link' do           
             .fas.fa-book
             Courses
+        %li{:class => "nav-item #{'active' if request.path == new_course_path}"}
+          = link_to new_course_path, class: 'nav-link' do           
+            .fas.fa-plus
+            Add NewCourse     
+      .form-inline.my-2.my-lg-0
+        = form_tag(courses_path, method: :get) do
+          .input-group 
+            = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'form-control mr-sm-2'
+            %span.input-group-append
+              %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"}
+                %span.fa.fa-search{"aria-hidden" => "true"} 
+      %ul.navbar-nav.mr-right
         %li.nav-item.dropdown
           %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-            Dropdown
-          .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
-            %a.dropdown-item{:href => "#"} Action
-            %a.dropdown-item{:href => "#"} Another action
+            .fa.fa-email
+            %b= current_user.email
+          .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdown"}
+            = link_to  edit_user_registration_path, class: "dropdown-item" do
+              .fa.fa-cog 
+              %b Account Setting
             .dropdown-divider
-            %a.dropdown-item{:href => "#"} Something else here     
-      %form.form-inline.my-2.my-lg-0
-        %input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
-        %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"} Search
-      %ul.navbar-nav.mr-right
-        %li.nav-item
-          = link_to  edit_user_registration_path,class: "nav-link" do
-            .fa.fa-cog 
-            %b Account Setting
-        %li.nav-item
-          = link_to destroy_user_session_path, class: "nav-link", method: :delete do
-            .fa.fa-sign-out-alt
-            %b Logout
+            = link_to destroy_user_session_path, class: "dropdown-item", method: :delete do
+              .fa.fa-sign-out-alt
+              %b Logout    
     - else
       %ul.navbar-nav
         %li.nav-item
-          = link_to  new_user_session_path, class: "nav-link" do
+          = link_to  new_user_session_path, class: "nav-link #{'active' if request.path == new_user_session_path}" do
             .fa.fa-sign-in-alt
             %b Login
         %li.nav-item
-          = link_to  new_user_registration_path, class: "nav-link" do
-            .fa.fa-sign-up-alt
+          = link_to  new_user_registration_path, class: "nav-link #{'active' if request.path == new_user_registration_path}" do
+            .fa.fa-user-plus
             %b Signup

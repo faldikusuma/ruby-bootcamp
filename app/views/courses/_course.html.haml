@@ -1,0 +1,22 @@
+.card
+  .card-header 
+    %h5.card-title
+      .fa.fa-book
+      = link_to  course.title, course_path(course)
+ 
+  .card-body
+    %p.card-text 
+      = course.description
+    %a.btn.btn-primary{:href => "#"} Go somewhere
+  .card-footer
+    %footer.blockquote-footer
+      %cite{:title => "Source Title"} 
+        .fa.fa-clock
+        = course.created_at.strftime("%B %d %Y")
+        .fa.fa-chalkboard-teacher
+        = course.user
+  .card-footer
+    %footer.footer 
+      = link_to 'Show', course
+      = link_to 'Edit', edit_course_path(course)
+      = link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }

@@ -1,12 +1,12 @@
-%p#notice= notice
 
-%p
-  %b Title:
-  = @course.title
-%p
-  %b Description:
-  = @course.description
+%nav{"aria-label" => "breadcrumb", :style => "--bs-breadcrumb-divider: '>';"}
+  %ol.breadcrumb
+    %li.breadcrumb-item
+      = link_to 'Courses', courses_path      
+    %li.breadcrumb-item.active{"aria-current" => "page"} 
+      = link_to 'Course', courses_path(@course) 
+= render "courses/course", course: @course
 
-= link_to 'Edit', edit_course_path(@course)
+= link_to 'Edit', edit_course_path(@course) ,class: 'btn btn-info'
 \|
-= link_to 'Back', courses_path
+= link_to 'Back', courses_path , class: 'btn btn-secondary'

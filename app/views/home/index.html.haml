@@ -1,8 +1,57 @@
 
+.jumbotron.my-4
+
+  .display-3
+    What is in your mind now.
+  %hr.my-4/
+  .form-inline.my-2.my-lg-0
+    = form_tag(courses_path, method: :get) do
+      .input-group 
+        = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'form-control mr-sm-2'
+        %span.input-group-append
+          %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"}
+            %span.fa.fa-search{"aria-hidden" => "true"} 
+  %hr.my-2/
+  = link_to "Sign up!", new_user_registration_path, class: "btn btn-success btn-lg"
+.card-group
+  .card.card-body 
+    %h1
+    .fa.fa-graduation-cap 
+    = Course.count
+    online courses
+    .row 
+    explore a variety topic
+  .card.card-body 
+    %h1
+    .fa.fa-user-graduate
+    = User.count
+    active learners
+    .row 
+    join to our biggest community
+  .card.card-body 
+    %h1
+    .fa.fa-chalkboard-teacher
+    = Course.distinct.count(:user_id)
+    experience instructor 
+    .row 
+    explore a variety topic
+  .card.card-body 
+    %h1
+    .fa.fa-infinity
+    = Course.count
+    lifetime access
+    .row 
+    Learn on your timemachine
+
 %h1 
-  Hello#word
-= link_to root_path do
-  .fa.fa-home
-= link_to courses_path, class: 'btn btn-primary' do
-  .fa.fa-book
-  Course
+  popular courses
+.card-columns 
+  - @courses.each do |course|
+    = render 'courses/course', course: course
+%hr
+%h1 
+  recent course
+.card-columns
+  - @recents.each do |recent|
+    = render 'courses/course', course: recent
+

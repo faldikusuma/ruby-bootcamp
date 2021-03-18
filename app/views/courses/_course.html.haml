@@ -1,13 +1,17 @@
 .card
   .card-header 
     %h5.card-title
-      .fa.fa-book
+      .fa.fa-graduation-cap
       = link_to  course.title, course_path(course)
- 
-  .card-body
-    %p.card-text 
-      = course.description
+  .card-body 
+    %small= simple_format(course.short_description)
     %a.btn.btn-primary{:href => "#"} Go somewhere
+  .card-footer 
+    .fa.fa-globe-africa
+    = course.language
+    .fa.fa-signal
+    = course.level
+    = number_to_currency(course.price)
   .card-footer
     %footer.blockquote-footer
       %cite{:title => "Source Title"} 

@@ -27,7 +27,7 @@ gem 'faker'
 # Use Active Storage variant
 gem 'devise'
 gem 'friendly_id', '~> 5.4.0'
-
+gem 'ransack'
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
